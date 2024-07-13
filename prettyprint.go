@@ -1,8 +1,9 @@
-package prettyprint
+package htmlformat
 
 import (
-	"golang.org/x/net/html"
 	"strings"
+
+	"golang.org/x/net/html"
 )
 
 // Prettify takes a string with unformatted HTML content and formats
@@ -10,19 +11,21 @@ import (
 //
 // For example, it takes a string of html like this:
 //
-//     <html><head></head><body><p>Hello</p></body></html>
+//	<html><head></head><body><p>Hello</p></body></html>
 //
 // and formats it into this:
 //
 // <html>
-//     <head>
-//     </head>
-//     <body>
-//         <a href="http://test.com">Test link</a>
-//         <p>
-//             <br/>
-//         </p>
-//     </body>
+//
+//	<head>
+//	</head>
+//	<body>
+//	    <a href="http://test.com">Test link</a>
+//	    <p>
+//	        <br/>
+//	    </p>
+//	</body>
+//
 // </html>
 //
 // if the provided indent parameter is a string with four spaces ("    ").

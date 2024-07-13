@@ -1,4 +1,4 @@
-package prettyprint
+package htmlformat
 
 import "testing"
 
