@@ -9,24 +9,22 @@ import (
 func TestFormatterBasic(t *testing.T) {
 	html := `<html><head></head><body><a href="http://test.com">Test link</a><p><br/></p></body></html>`
 	expected := `<html>
-    <head>
-    </head>
-    <body>
-        <a href="http://test.com">Test link</a>
-        <p>
-            <br/>
-        </p>
-    </body>
+  <head>
+  </head>
+  <body>
+    <a href="http://test.com">Test link</a>
+    <p>
+      <br/>
+    </p>
+  </body>
 </html>`
-	config := FormatterConfig{
-		Indent: "    ",
-	}
+	config := FormatterConfig{}
 	formatter := NewFormatter(config)
 	pretty, _ := formatter.FormatString(html)
 	assert.Equal(t, expected, pretty)
 }
 
-func TestFormatterWithNewlines(t *testing.T) {
+func TestFormatterWithNewlinesAndCustomIndentation(t *testing.T) {
 	html := `<!doctype html><html><head>
 <title>Website Title</title>
 </head><body>
