@@ -1,8 +1,12 @@
 package htmlformat
 
-import "testing"
+import (
+	"testing"
 
-func TestPrettyPrint(t *testing.T) {
+	"github.com/stretchr/testify/assert"
+)
+
+func TestFormatterBasic(t *testing.T) {
 	html := `<html><head></head><body><a href="http://test.com">Test link</a><p><br/></p></body></html>`
 	expected := `<html>
     <head>
@@ -14,13 +18,15 @@ func TestPrettyPrint(t *testing.T) {
         </p>
     </body>
 </html>`
-	pretty, _ := Prettify(html, "    ")
-	if pretty != expected {
-		t.Errorf("Expected:\n\n%s\n\nbut got:\n\n%s", expected, pretty)
+	config := FormatterConfig{
+		Indent: "    ",
 	}
+	formatter := NewFormatter(config)
+	pretty, _ := formatter.FormatString(html)
+	assert.Equal(t, expected, pretty)
 }
 
-func TestPrettyPrintWithNewlines(t *testing.T) {
+func TestFormatterWithNewlines(t *testing.T) {
 	html := `<!doctype html><html><head>
 <title>Website Title</title>
 </head><body>
@@ -39,8 +45,12 @@ func TestPrettyPrintWithNewlines(t *testing.T) {
         </div>
     </body>
 </html>`
-	pretty, _ := Prettify(html, "    ")
-	if pretty != expected {
-		t.Errorf("Expected:\n\n%s\n\nbut got:\n\n%s", expected, pretty)
+
+	config := FormatterConfig{
+		Indent: "    ",
 	}
+	formatter := NewFormatter(config)
+	pretty, _ := formatter.FormatString(html)
+
+	assert.Equal(t, expected, pretty)
 }
